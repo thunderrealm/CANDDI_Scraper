@@ -50,6 +50,14 @@ function FindThings(input)
     var emails = knwlInstance.get('emails');
 
     // THIS PRINTS OUT IN THE FORMAT (plugin properties, preiview, instances found)
-    console.log(emails);
+    if(emails[0])
+    {
+        console.log(emails[0].found);
+    }
+    else
+    {
+        console.log("nothing in there")
+    }
+
 
 }

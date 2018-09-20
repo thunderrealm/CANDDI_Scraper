@@ -45,7 +45,7 @@ function FindThings(input)
     // initialise the string - IMPORTANT
     knwlInstance.init(input);
 
-    // grab the emails
+    // grab the info
     GetEmails(input);
     GetPhones(input);
     GetLocs(input);
@@ -56,11 +56,11 @@ function GetPhones(input)
 {
     // Grab the phones in the string
     var phones = knwlInstance.get('phones');
-    
+
     //parse the data we care about into a readable format
     for (i=0; i < phones.length; i++)
     {
-        phoneList.push(phones[i]);
+        phoneList.push(phones[i].phone);
     }
 
     // print the phone numbers - if tehre are 1 or more
@@ -100,7 +100,7 @@ function GetEmails(input)
     }
 }
 
-function GetLocs(input)
+function GetLocs(input) // ONLY RETURNS A COUNTRY
 {
     // Grab the Locations in the string
     var places = knwlInstance.get('places');
@@ -112,14 +112,14 @@ function GetLocs(input)
         // will be something like places[i].Streetname + places[i].city + places[i].postcode
         var address = '';
       
-        locList.push(address);
+        locList.push(places[i].place);
     }
 
     // print the addresses
     // THIS PRINTS OUT IN THE FORMAT (plugin properties, preiview, instances found)
     if(locList[0])
     {
-        console.log("\n location Addresses as follows")
+        console.log("\n Countries as follows")
         console.log(locList);
     }
     else

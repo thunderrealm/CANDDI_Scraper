@@ -1,0 +1,24 @@
+{
+  "name": "canddi_scraper",
+  "version": "1.0.0",
+  "description": "TEST PKGJSON",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NeonDrive/CANDDIScraper.git"
+  },
+  "author": "RichardLucas/NeonDrive",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NeonDrive/CANDDIScraper/issues"
+  },
+  "homepage": "https://github.com/NeonDrive/CANDDIScraper#readme",
+  "dependencies": {
+    "cherio": "^1.0.0-rc.2",
+    "knwl.js": "^1.0.2",
+    "require": "^2.4.20"
+  }
+}

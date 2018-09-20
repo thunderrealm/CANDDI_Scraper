@@ -43,11 +43,13 @@ https.get('https://www.canddi.com', (resp) =>
 
 function FindThings(input)
 {
+    // initialise the string - IMPORTANT
     knwlInstance.init(input);
 
-  var emails = knwlInstance.get('emails');
+    // Grab the emails in the string
+    var emails = knwlInstance.get('emails');
 
-  // THIS PRINTS OUT IN THE FORMAT (plugin properties, preiview, instances found)
-  console.log(emails);
+    // THIS PRINTS OUT IN THE FORMAT (plugin properties, preiview, instances found)
+    console.log(emails);
 
 }

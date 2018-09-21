@@ -95,6 +95,18 @@ readlineInstance.on('close', function()
 
 function FindThings(input)
 {
+    const $ = cherio.load(input);
+
+    //test to output teh text for the number on canddi.com
+    // const navButtons = $('.header-nav-content header-nav-right hidden-xs');
+    // const ouput = navButtons.find(`btn btn-sm btn-default`).attr('href');
+
+    //test to output teh word gmail from google.com
+    const body = $('.gb_qe gb_R gb_Sg gb_Jg');
+    const output = body.html();
+
+    console.log("I WANT YOU TO OUTPUT JERRY \n" + body + output);
+
     // initialise the string of html - IMPORTANT
     knwlInstance.init(input);
 

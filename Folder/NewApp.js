@@ -23,7 +23,8 @@ function test()
 {
     // query is a string of anythign
     // callback is a function once the line has been read
-    readlineInstance.question(`\n\nWhat Webpage would you like to scrape? ('exit' to leave) \n`, function(pageAddress)
+    readlineInstance.question(`\n\nWhat Webpage would you like to scrape? ('exit' to leave) \n`,
+     function(pageAddress)
     {
         // if the user types exit
         if(pageAddress.toLowerCase().trim() === 'exit')
@@ -45,13 +46,13 @@ function test()
             // Print the response status code if a response was received
             console.log('statusCode:', response && response.statusCode);
 
+            // Send the body through cherio? here or in function?
             // Go and find teh info
             FindThings(body);
 
             // print the info
             PrintWebpageInfo();
 
-            // This runs before teh finding and printing above does - TODO: not sure how to fix
             // set soemthing we will want to ask say to the user
             readlineInstance.setPrompt('\nWould You like to Try another page? \n');
 
@@ -70,7 +71,6 @@ function test()
             }
             else if(answer.toLowerCase().trim() === 'yes')
             {
-                // TODO: make teh code repeatable
                 console.log(`\n\nWell, alright then.`);
                 
                 test();

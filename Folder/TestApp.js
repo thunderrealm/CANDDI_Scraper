@@ -9,11 +9,10 @@ var knwl = require('knwl.js');
 var knwlInstance = new knwl('English');
 
 // load https
-const https = require('https');
-const http = require('http');
+//const https = require('https');
+//const http = require('http');
 
-var msg = "\n The modules are loaded \n";
-console.log(msg);
+console.log("\n The modules are loaded \n");
 
 // create a container to store teh main info we want in
 var phoneList = [];
@@ -26,25 +25,25 @@ var locList = [];
 // TODO: put into a function that takes a URL string as a parameter
 var URLin = 'https://www.canddi.com';
 
-console.log("\n Searching " + URLin + " for data.")
+console.log("\nSearching " + URLin + " for data.")
 
-https.get(URLin, (resp) =>
-{
-  let data = '';
+// https.get(URLin, (resp) =>
+// {
+//   let data = '';
 
-  // A chunk of data has been recieved.
-  resp.on('data', (chunk) => {data += chunk;});
+//   // A chunk of data has been recieved.
+//   resp.on('data', (chunk) => {data += chunk;});
 
-  // The whole response has been received. Print out the result.
-  resp.on('end', ()    => {FindThings(data);});
+//   // The whole response has been received. Print out the result.
+//   resp.on('end', ()    => {FindThings(data);});
 
-}).on("error", (err) => {console.log("Error: " + err.message);});
+// }).on("error", (err) => {console.log("Error: " + err.message);});
 
 
 
 function FindThings(input)
 {
-    // initialise the string - IMPORTANT
+    // initialise the string of html - IMPORTANT
     knwlInstance.init(input);
 
     // grab the info
@@ -129,3 +128,16 @@ function GetLocs(input) // ONLY RETURNS A COUNTRY
         console.log("\n no addresses found")
     }
 }
+
+
+var request = require('request');
+request(URLin, function (error, response, body)
+{
+    console.log(`good evening _______________________________________________________________`)
+    console.log('error:', error); // Print the error if one occurred
+    console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+    //console.log('body:', body); // Print the HTML for the Google homepage.
+
+    FindThings(body);
+});
+

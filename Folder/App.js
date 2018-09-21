@@ -1,9 +1,6 @@
 // includes
 var readline = require('readline');
 
-//a boolean to determin  whether or not we are searching or waiting for use input
-//var bIsSearch = false;
-
 // this is a variable that IS the line being read?
 // no the isntanceof teh readline
 var readlineInstance = readline.createInterface(process.stdin, process.stdout);

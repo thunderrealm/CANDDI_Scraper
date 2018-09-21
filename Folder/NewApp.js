@@ -13,71 +13,83 @@ var requireLoad = require('require/server').listen(4321);
 var cherio = require('cherio');
 
 
-
 // container to hold webpage data - added countries to m ake it easier to read. addresses will be used later and countries will be deleted
 var webpage = { URL: '', Emails:[], Phones:[], Countries:[], Addresses: [] };
 
-// query is a string of anythign
-// callback is a function once the line has been read
-readlineInstance.question(`\n\nWhat Webpage would you like to scrape? \n`, function(pageAddress)
+
+test();
+
+function test()
 {
-    // set the URL in th container for printing later - TODO: probably not needed
-    webpage.URL = pageAddress;
-
-    request(pageAddress, function (error, response, body)
+    // query is a string of anythign
+    // callback is a function once the line has been read
+    readlineInstance.question(`\n\nWhat Webpage would you like to scrape? ('exit' to leave) \n`, function(pageAddress)
     {
-        console.log(`\nSearching ` + pageAddress + ` for Data.`);
-
-        // Print the error if one occurred
-        console.log('error:', error);
-
-        // Print the response status code if a response was received
-        console.log('statusCode:', response && response.statusCode);
-
-        // Go and find teh info
-        FindThings(body);
-
-        // print the info
-        PrintWebpageInfo();
-    });
-
-    // This runs before teh finding and printing above does - TODO: not sure how to fix
-    // set soemthing we will want to ask say to the user
-    readlineInstance.setPrompt('Would You like to Try another page? \n');
-
-    //ask the user teh prompt that was set
-    readlineInstance.prompt();
-
-    // when teh user has input a message and pressed enter
-    readlineInstance.on('line', function(answer)
-    {
-        // if the user says tehy dont want to try a new page
-        if(answer.toLowerCase().trim() === 'no')
+        // if the user types exit
+        if(pageAddress.toLowerCase().trim() === 'exit')
         {
             // close
             readlineInstance.close()
         }
-        else if(answer.toLowerCase().trim() === 'yes')
-        {
-            // TODO: make teh code repeatable
-            console.log(`\n\n\nSome code goes in this area so you can enter a new webpage. \n but Its not there currently so im going to exit`);
-            readlineInstance.close()
-        }
-        else
-        {
-            readlineInstance.setPrompt(`\nI didn't understand that.\nWould You like to Try another page? (yes or no)\n`);
-            readlineInstance.prompt();
-        }
-    });
+        // set the URL in th container for printing later - TODO: probably not needed
+        // TODO: do some validation checks
+        webpage.URL = pageAddress;
 
-});
+        request(pageAddress, function (error, response, body)
+        {
+            console.log(`\nSearching ` + pageAddress + ` for Data.`);
+
+            // Print the error if one occurred
+            console.log('error:', error);
+
+            // Print the response status code if a response was received
+            console.log('statusCode:', response && response.statusCode);
+
+            // Go and find teh info
+            FindThings(body);
+
+            // print the info
+            PrintWebpageInfo();
+
+            // This runs before teh finding and printing above does - TODO: not sure how to fix
+            // set soemthing we will want to ask say to the user
+            readlineInstance.setPrompt('\nWould You like to Try another page? \n');
+
+            //ask the user teh prompt that was set
+            readlineInstance.prompt();
+        });
+
+        // when teh user has input a message and pressed enter
+        readlineInstance.on('line', function(answer)
+        {
+            // if the user says tehy dont want to try a new page
+            if(answer.toLowerCase().trim() === 'no')
+            {
+                // close
+                readlineInstance.close()
+            }
+            else if(answer.toLowerCase().trim() === 'yes')
+            {
+                // TODO: make teh code repeatable
+                console.log(`\n\nWell, alright then.`);
+                
+                test();
+            }
+            else
+            {
+                readlineInstance.setPrompt(`\nI didn't understand that.\nWould You like to Try another page? (yes or no)\n`);
+                readlineInstance.prompt();
+            }
+        });
+    });
+}
 
 // when we hear the close fucntion call
 readlineInstance.on('close', function()
 {
     console.log(`\nWell that was fun.\nGoodbye!`);
 
-    //exit the process - do we ned readlineInstance.close() AND process.exit()?????
+    //exit the process - TODO: do we ned readlineInstance.close() AND process.exit()?????
     process.exit();
 });
 
@@ -116,7 +128,7 @@ function GetEmails(input)
     }
 }
 
-function GetLocs(input) // ONLY RETURNS A COUNTRY TODO: got to find the actual address but for now a country will do
+function GetLocs(input) // ONLY RETURNS A COUNTRY - TODO: got to find the actual address but for now a country will do
 {
     // Grab the Locations in the string
     var gotCountries = knwlInstance.get('places');
@@ -131,7 +143,7 @@ function GetLocs(input) // ONLY RETURNS A COUNTRY TODO: got to find the actual a
 
 function PrintWebpageInfo()
 {
-    console.log(`\n We looked at ` + webpage.URL + ` and; \n`);
+    console.log(`\nWe looked at ` + webpage.URL + ` and;`);
  
     // TODO this should be a for loop, with a switch case inside it maybe?
     // or not even a loop. maybe concolse.log(webpage); ???

@@ -99,7 +99,7 @@ function FindThings(input)
 
     //test to output teh text for the number on canddi.com
     // const navButtons = $('.header-nav-content header-nav-right hidden-xs');
-    // const ouput = navButtons.find(`btn btn-sm btn-default`).attr('href');
+    // const ouput = navButtons.find(`btn btn-sm btn-default`).attr('href').text();
 
     //test to output teh word gmail from google.com
     const body = $('.gb_qe gb_R gb_Sg gb_Jg');

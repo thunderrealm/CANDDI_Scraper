@@ -60,22 +60,22 @@ readlineInstance.question(`\n\nWhat Webpage would you like to scrape? \n`, funct
         else if(answer.toLowerCase().trim() === 'yes')
         {
             // TODO: make teh code repeatable
-            console.log(`\nSome code goes in this area so you can enter a new webpage. \n but Its not there currently so im going to exit`);
+            console.log(`\n\n\nSome code goes in this area so you can enter a new webpage. \n but Its not there currently so im going to exit`);
             readlineInstance.close()
         }
         else
         {
-            readlineInstance.setPrompt(`I didn't understand that.\nWould You like to Try another page? (yes or no)\n`);
+            readlineInstance.setPrompt(`\nI didn't understand that.\nWould You like to Try another page? (yes or no)\n`);
             readlineInstance.prompt();
         }
     });
 
 });
 
-// when we hear the close fucntion call - required for later use with the prompt business
+// when we hear the close fucntion call
 readlineInstance.on('close', function()
 {
-    console.log(`Well that was fun.\nGoodbye!`);
+    console.log(`\nWell that was fun.\nGoodbye!`);
 
     //exit the process - do we ned readlineInstance.close() AND process.exit()?????
     process.exit();

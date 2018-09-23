@@ -10,7 +10,7 @@ var knwlInstance = new knwl('English');
 // load require? is the .listen required?---------------------------------NOT USED YET
 var requireLoad = require('require/server').listen(4321);
 // load cherio module-----------------------------------------------------NOT USED YET
-var cherio = require('cherio');
+var cheerio = require('cheerio');
 
 
 // container to hold webpage data - added countries to m ake it easier to read. addresses will be used later and countries will be deleted
@@ -95,25 +95,30 @@ readlineInstance.on('close', function()
 
 function FindThings(input)
 {
-    const $ = cherio.load(input);
+    //cherio code was here
+    console.log(`cheerio test start`);
+            
+    const $ = cheerio.load(input);
 
     //test to output teh text for the number on canddi.com
     // const navButtons = $('.header-nav-content header-nav-right hidden-xs');
     // const ouput = navButtons.find(`btn btn-sm btn-default`).attr('href').text();
 
-    //test to output teh word gmail from google.com
-    const body = $('.gb_qe gb_R gb_Sg gb_Jg');
-    const output = body.html();
+    //test to output - what if ther is no main??
+    const Test = $('.main');
+    const TestText = Test.html();
 
-    console.log("I WANT YOU TO OUTPUT JERRY \n" + body + output);
+    console.log(TestText);
+
+    console.log(`cheerio test end\n\n`);
 
     // initialise the string of html - IMPORTANT
-    knwlInstance.init(input);
+    knwlInstance.init(TestText);
 
     // grab the info
-    GetEmails(input);
-    GetPhones(input);
-    GetLocs(input);    
+    GetEmails(TestText);
+    GetPhones(TestText);
+    GetLocs(TestText);    
 }
 
 function GetPhones(input)

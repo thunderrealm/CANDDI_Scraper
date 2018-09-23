@@ -6,11 +6,12 @@ var request = require('request');
 // load & instantiate knwl module. set to english
 var knwl = require('knwl.js');
 var knwlInstance = new knwl('English');
+// load cherio module
+var cheerio = require('cheerio');
+
 
 // load require? is the .listen required?---------------------------------NOT USED YET
 var requireLoad = require('require/server').listen(4321);
-// load cherio module-----------------------------------------------------NOT USED YET
-var cheerio = require('cheerio');
 
 
 // container to hold webpage data - added countries to m ake it easier to read. addresses will be used later and countries will be deleted
@@ -38,6 +39,7 @@ function test()
 
         request(pageAddress, function (error, response, body)
         {
+            
             console.log(`\nSearching ` + pageAddress + ` for Data.`);
 
             // Print the error if one occurred
@@ -52,12 +54,14 @@ function test()
 
             // print the info
             PrintWebpageInfo();
+        
 
             // set soemthing we will want to ask say to the user
             readlineInstance.setPrompt('\nWould You like to Try another page? \n');
 
             //ask the user teh prompt that was set
             readlineInstance.prompt();
+        
         });
 
         // when teh user has input a message and pressed enter
@@ -105,18 +109,25 @@ function FindThings(input)
     // const ouput = navButtons.find(`btn btn-sm btn-default`).attr('href').text();
 
     //test to output - what if ther is no main??
-    const Test = $('.main');
-    const TestText = Test.html();
+    const Test = $('html');
+    const TestHtml = Test.html();
+    const TestText = Test.text();
 
     console.log(TestText);
 
     console.log(`cheerio test end\n\n`);
 
+
     // initialise the string of html - IMPORTANT
+    knwlInstance.init(TestHtml);
+    // grab emails
+    GetEmails(TestHtml);
+
+    // initialise the string of text - IMPORTANT
     knwlInstance.init(TestText);
 
     // grab the info
-    GetEmails(TestText);
+    // GetEmails(TestHtml);
     GetPhones(TestText);
     GetLocs(TestText);    
 }

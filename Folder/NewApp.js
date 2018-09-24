@@ -99,24 +99,12 @@ readlineInstance.on('close', function()
 
 function FindThings(input)
 {
-    //cherio code was here
-    console.log(`cheerio test start`);
-            
     const $ = cheerio.load(input);
-
-    //test to output teh text for the number on canddi.com
-    // const navButtons = $('.header-nav-content header-nav-right hidden-xs');
-    // const ouput = navButtons.find(`btn btn-sm btn-default`).attr('href').text();
 
     //test to output - what if ther is no main??
     const Test = $('html');
     const TestHtml = Test.html();
     const TestText = Test.text();
-
-    console.log(TestText);
-
-    console.log(`cheerio test end\n\n`);
-
 
     // initialise the string of html - IMPORTANT
     knwlInstance.init(TestHtml);
@@ -127,7 +115,6 @@ function FindThings(input)
     knwlInstance.init(TestText);
 
     // grab the info
-    // GetEmails(TestHtml);
     GetPhones(TestText);
     GetLocs(TestText);    
 }
@@ -161,9 +148,21 @@ function GetLocs(input) // ONLY RETURNS A COUNTRY - TODO: got to find the actual
     // Grab the Locations in the string
     var gotCountries = knwlInstance.get('places');
     
-    //parse the data we care about into a readable format
+    // Parse the data we care about into a readable format
     for (i=0; i < gotCountries.length; i++)
-    {      
+    {     
+        // for each country
+        // chek between 2 and 6 lines above it for the address
+        //max format example:       min format example:
+        //flat4                     24 ford street
+        //cheshire house            n16 5he
+        //24 ford street            england
+        //barnet
+        //greaterlondon
+        //n16 5he
+        //England/UK
+
+        
         webpage.Countries.push(gotCountries[i].place);
     }
 

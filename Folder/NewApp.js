@@ -39,29 +39,29 @@ function test()
 
         request(pageAddress, function (error, response, body)
         {
+            if(!error && response.statusCode == 200)
+            {
+                console.log(`\nSearching ` + pageAddress + ` for Data.`);
+
+                // Print the error if one occurred
+                console.log('error:', error);
+
+                // Print the response status code if a response was received
+                console.log('statusCode:', response && response.statusCode);
+
+                // Go and find teh info
+                FindThings(body);
+
+                // print the info
+                PrintWebpageInfo();
             
-            console.log(`\nSearching ` + pageAddress + ` for Data.`);
 
-            // Print the error if one occurred
-            console.log('error:', error);
+                // set soemthing we will want to ask say to the user
+                readlineInstance.setPrompt('\nWould You like to Try another page? \n');
 
-            // Print the response status code if a response was received
-            console.log('statusCode:', response && response.statusCode);
-
-            // Send the body through cherio? here or in function?
-            // Go and find teh info
-            FindThings(body);
-
-            // print the info
-            PrintWebpageInfo();
-        
-
-            // set soemthing we will want to ask say to the user
-            readlineInstance.setPrompt('\nWould You like to Try another page? \n');
-
-            //ask the user teh prompt that was set
-            readlineInstance.prompt();
-        
+                //ask the user teh prompt that was set
+                readlineInstance.prompt();
+            }
         });
 
         // when teh user has input a message and pressed enter

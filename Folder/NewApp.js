@@ -103,13 +103,12 @@ function FindThings(input)
 
     //test to output - what if ther is no main??
     const Test = $('html');
-    const TestHtml = Test.html();
     const TestText = Test.text();
 
     // initialise the string of html - IMPORTANT
-    knwlInstance.init(TestHtml);
+    knwlInstance.init(input);
     // grab emails
-    GetEmails(TestHtml);
+    GetEmails(input);
 
     // initialise the string of text - IMPORTANT
     knwlInstance.init(TestText);
